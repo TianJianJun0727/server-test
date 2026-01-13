@@ -119,9 +119,7 @@ const mockData = {
  */
 router.post("/senders", (req, res) => {
   console.log("📤 返回 Sender 列表:", mockData.senders);
-  res.json({
-    results: mockData.senders,
-  });
+  res.json(mockData.senders);
 });
 
 /**
