@@ -119,7 +119,9 @@ const mockData = {
  */
 router.post("/senders", (req, res) => {
   console.log("📤 返回 Sender 列表:", mockData.senders);
-  res.json(mockData.senders);
+  res.json({
+    results: mockData.senders,
+  });
 });
 
 /**
@@ -139,9 +141,7 @@ router.post("/templates", (req, res) => {
 
   const templates = mockData.templates[senderId] || [];
   console.log(`📤 返回 Sender ${senderId} 的模板列表:`, templates);
-  res.json({
-    results: templates,
-  });
+  res.json(templates);
 });
 
 /**
