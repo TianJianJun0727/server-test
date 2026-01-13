@@ -119,7 +119,9 @@ const mockData = {
  */
 router.get('/senders', (req, res) => {
   console.log('📤 返回 Sender 列表:', mockData.senders);
-  res.json(mockData.senders);
+  res.json({
+    results: mockData.senders
+  });
 });
 
 /**
@@ -139,7 +141,9 @@ router.get('/templates', (req, res) => {
 
   const templates = mockData.templates[senderId] || [];
   console.log(`📤 返回 Sender ${senderId} 的模板列表:`, templates);
-  res.json(templates);
+  res.json({
+    results: templates
+  });
 });
 
 /**
@@ -159,7 +163,9 @@ router.get('/languages', (req, res) => {
 
   const languages = mockData.languages[templateId] || [];
   console.log(`📤 返回模板 ${templateId} 的语言列表:`, languages);
-  res.json(languages);
+  res.json({
+    results: languages
+  });
 });
 
 /**
@@ -185,7 +191,9 @@ router.get('/template-parameters', (req, res) => {
   };
 
   console.log(`📤 返回模板 ${templateId} (${language}) 的参数:`, parameters);
-  res.json(parameters);
+  res.json({
+    results: parameters
+  });
 });
 
 /**
