@@ -182,7 +182,9 @@ router.post("/languages", (req, res) => {
 router.post("/workflow-action", (req, res) => {
   const { inputFields = {} } = req.body;
 
-  const { from, selectTemplate, selectLanguage, to } = inputFields;
+  console.log("🚀 收到 Workflow Action 请求, 输入字段:", inputFields, req.body);
+
+  const { from, selectTemplate, selectLanguage, to } = req.body;
 
   // 验证必需字段
   if (!from || !selectTemplate || !selectLanguage || !to) {
