@@ -182,11 +182,10 @@ router.post("/languages", (req, res) => {
 router.post("/workflow-action", (req, res) => {
   const { inputFields = {} } = req.body;
 
-  const { from, selectTemplate, selectLanguage, templateParameters } =
-    inputFields;
+  const { from, selectTemplate, selectLanguage, to } = inputFields;
 
   // 验证必需字段
-  if (!from || !selectTemplate || !selectLanguage || !templateParameters) {
+  if (!from || !selectTemplate || !selectLanguage || !to) {
     console.log("❌ 缺少必需字段");
     return res.status(400).json({
       outputFields: {
