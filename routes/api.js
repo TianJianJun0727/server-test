@@ -118,7 +118,6 @@ const mockData = {
  * POST /api/senders
  */
 router.post("/senders", (req, res) => {
-  console.log("/senders", req);
   res.json({
     options: mockData["senders"],
     after: false,
@@ -132,7 +131,10 @@ router.post("/senders", (req, res) => {
  */
 router.post("/templates", (req, res) => {
   console.log("/templates", req.body)
-  const { senderId } = req.body;
+
+  const { fields,inputFields,origin } = req.body;
+  console.log("body", fields,inputFields,origin);
+  const senderId = inputFields['sender']['value'];
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
     return res.status(400).json({
