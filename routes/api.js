@@ -130,11 +130,9 @@ router.post("/senders", (req, res) => {
  * POST /api/templates
  */
 router.post("/templates", (req, res) => {
-  console.log("/templates", req.body)
-
-  const { fields,inputFields,origin } = req.body;
-  console.log("body", fields,inputFields,origin);
-  const senderId = inputFields['sender']['value'];
+  const { inputFields={} } = req.body;
+  const { sender } = inputFields;
+  const senderId = sender?.['value'];
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
     return res.status(400).json({
@@ -156,7 +154,10 @@ router.post("/templates", (req, res) => {
  * POST /api/languages
  */
 router.post("/languages", (req, res) => {
-  const { templateId } = req.body;
+
+  const { inputFields={} } = req.body;
+  const { selectTemplate } = inputFields;
+  const templateId = selectTemplate?.['value'];
 
   if (!templateId) {
     console.log("❌ 缺少必需参数: templateId");
