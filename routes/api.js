@@ -159,6 +159,8 @@ router.post("/languages", (req, res) => {
   const { selectTemplate } = inputFields;
   const templateId = selectTemplate?.['value'];
 
+  console.log('languages',selectTemplate,templateId);
+
   if (!templateId) {
     console.log("❌ 缺少必需参数: templateId");
     return res.status(400).json({
@@ -168,38 +170,11 @@ router.post("/languages", (req, res) => {
   }
 
   const options = mockData.languages[templateId] || [];
+
   res.json({
     options,
     after: false,
     searchable: false,
-  });
-});
-
-/**
- * 获取模板参数（依赖 templateId 和 language）
- * POST /api/template-parameters
- */
-router.post("/template-parameters", (req, res) => {
-  const { templateId, language } = req.body;
-
-  if (!templateId || !language) {
-    console.log("❌ 缺少必需参数: templateId 或 language");
-    return res.status(400).json({
-      error: "Bad Request",
-      message: "templateId and language are required",
-    });
-  }
-
-  const key = `${templateId}_${language}`;
-  const parameters = mockData.templateParameters[key] || {
-    header: [],
-    body: [],
-    buttons: [],
-  };
-
-  console.log(`📤 返回模板 ${templateId} (${language}) 的参数:`, parameters);
-  res.json({
-    results: parameters,
   });
 });
 
