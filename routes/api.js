@@ -118,9 +118,11 @@ const mockData = {
  * POST /api/senders
  */
 router.post("/senders", (req, res) => {
-  console.log("📤 返回 Sender 列表:", mockData.senders);
+  console.log("/senders", req);
   res.json({
-    results: mockData.senders,
+    options: mockData["senders"],
+    after: false,
+    searchable: true,
   });
 });
 
@@ -129,7 +131,9 @@ router.post("/senders", (req, res) => {
  * POST /api/templates
  */
 router.post("/templates", (req, res) => {
+  console.log("/templates", req)
   const { senderId } = req.body;
+
 
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
