@@ -159,8 +159,6 @@ router.post("/languages", (req, res) => {
   const { selectTemplate } = inputFields;
   const templateId = selectTemplate?.['value'];
 
-  console.log('languages',selectTemplate,templateId);
-
   if (!templateId) {
     console.log("❌ 缺少必需参数: templateId");
     return res.status(400).json({
@@ -171,7 +169,6 @@ router.post("/languages", (req, res) => {
 
   const options = mockData.languages[templateId] || [];
 
-  console.log(options);
 
   res.json({
     options,
