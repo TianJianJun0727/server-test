@@ -122,7 +122,7 @@ router.post("/senders", (req, res) => {
   res.json({
     options: mockData["senders"],
     after: false,
-    searchable: true,
+    searchable: false,
   });
 });
 
