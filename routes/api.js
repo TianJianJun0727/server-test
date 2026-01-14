@@ -131,8 +131,8 @@ router.post("/senders", (req, res) => {
  */
 router.post("/templates", (req, res) => {
   const { inputFields = {}, fetchOptions = {} } = req.body;
-  const { sender } = inputFields;
-  const senderId = sender?.["value"];
+  const { from } = inputFields;
+  const senderId = from?.["value"];
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
     return res.status(400).json({
@@ -182,11 +182,11 @@ router.post("/languages", (req, res) => {
 router.post("/workflow-action", (req, res) => {
   const { inputFields = {} } = req.body;
 
-  const { sender, selectTemplate, selectLanguage, templateParameters } =
+  const { from, selectTemplate, selectLanguage, templateParameters } =
     inputFields;
 
   // 验证必需字段
-  if (!sender || !selectTemplate || !selectLanguage || !templateParameters) {
+  if (!from || !selectTemplate || !selectLanguage || !templateParameters) {
     console.log("❌ 缺少必需字段");
     return res.status(400).json({
       outputFields: {
