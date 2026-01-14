@@ -182,14 +182,10 @@ router.post("/languages", (req, res) => {
  * POST /api/workflow-action
  */
 router.post("/workflow-action", (req, res) => {
-  const { sender, selectTemplate, selectLanguage, templateParameters } =
-    req.body;
+  const { inputFields={} } = req.body;
 
-  console.log("\n🔥 执行 Workflow Action");
-  console.log("发送者:", sender);
-  console.log("模板:", selectTemplate);
-  console.log("语言:", selectLanguage);
-  console.log("模板参数:", templateParameters);
+  const { sender, selectTemplate, selectLanguage, templateParameters } = inputFields;
+
 
   // 验证必需字段
   if (!sender || !selectTemplate || !selectLanguage || !templateParameters) {
