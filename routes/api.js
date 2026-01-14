@@ -171,6 +171,8 @@ router.post("/languages", (req, res) => {
 
   const options = mockData.languages[templateId] || [];
 
+  console.log(options);
+
   res.json({
     options,
     after: false,
