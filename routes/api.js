@@ -120,7 +120,7 @@ const mockData = {
 router.post("/senders", (req, res) => {
   res.json({
     options: mockData["senders"],
-    after: '1111',
+    after: "1111",
     searchable: true,
   });
 });
@@ -130,9 +130,9 @@ router.post("/senders", (req, res) => {
  * POST /api/templates
  */
 router.post("/templates", (req, res) => {
-  const { inputFields={} } = req.body;
+  const { inputFields = {}, fetchOptions = {} } = req.body;
   const { sender } = inputFields;
-  const senderId = sender?.['value'];
+  const senderId = sender?.["value"];
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
     return res.status(400).json({
@@ -144,8 +144,8 @@ router.post("/templates", (req, res) => {
   const options = mockData.templates[senderId] || [];
   res.json({
     options,
-    after: false,
-    searchable: false,
+    after: "2222",
+    searchable: true,
   });
 });
 
@@ -154,10 +154,9 @@ router.post("/templates", (req, res) => {
  * POST /api/languages
  */
 router.post("/languages", (req, res) => {
-
-  const { inputFields={} } = req.body;
+  const { inputFields = {} } = req.body;
   const { selectTemplate } = inputFields;
-  const templateId = selectTemplate?.['value'];
+  const templateId = selectTemplate?.["value"];
 
   if (!templateId) {
     console.log("❌ 缺少必需参数: templateId");
@@ -168,7 +167,6 @@ router.post("/languages", (req, res) => {
   }
 
   const options = mockData.languages[templateId] || [];
-
 
   res.json({
     options,
@@ -182,10 +180,10 @@ router.post("/languages", (req, res) => {
  * POST /api/workflow-action
  */
 router.post("/workflow-action", (req, res) => {
-  const { inputFields={} } = req.body;
+  const { inputFields = {} } = req.body;
 
-  const { sender, selectTemplate, selectLanguage, templateParameters } = inputFields;
-
+  const { sender, selectTemplate, selectLanguage, templateParameters } =
+    inputFields;
 
   // 验证必需字段
   if (!sender || !selectTemplate || !selectLanguage || !templateParameters) {
