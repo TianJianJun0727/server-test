@@ -131,10 +131,8 @@ router.post("/senders", (req, res) => {
  * POST /api/templates
  */
 router.post("/templates", (req, res) => {
-  console.log("/templates", req)
+  console.log("/templates", req.body)
   const { senderId } = req.body;
-
-
   if (!senderId) {
     console.log("❌ 缺少必需参数: senderId");
     return res.status(400).json({
@@ -143,9 +141,12 @@ router.post("/templates", (req, res) => {
     });
   }
 
-  const templates = mockData.templates[senderId] || [];
-  console.log(`📤 返回 Sender ${senderId} 的模板列表:`, templates);
-  res.json(templates);
+  const options = mockData.templates[senderId] || [];
+  res.json({
+    options,
+    after: false,
+    searchable: false,
+  });
 });
 
 /**
@@ -163,10 +164,11 @@ router.post("/languages", (req, res) => {
     });
   }
 
-  const languages = mockData.languages[templateId] || [];
-  console.log(`📤 返回模板 ${templateId} 的语言列表:`, languages);
+  const options = mockData.languages[templateId] || [];
   res.json({
-    results: languages,
+    options,
+    after: false,
+    searchable: false,
   });
 });
 
