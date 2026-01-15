@@ -24,6 +24,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// 根路径
+app.get("/", (req, res) => {
+  res.send("hello");
+});
+
 // API 路由
 app.use("/api", apiRoutes);
 
